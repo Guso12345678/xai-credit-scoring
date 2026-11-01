@@ -1,0 +1,179 @@
+{
+  "tasa_impago": 0.22125813449023862,
+  "corr_media_facturas": 0.886414449320929,
+  "metricas_test": {
+    "ROC-AUC": {
+      "Dummy": 0.5,
+      "Regresión logística": 0.7142,
+      "XGBoost": 0.7731
+    },
+    "PR-AUC": {
+      "Dummy": 0.2213,
+      "Regresión logística": 0.5044,
+      "XGBoost": 0.5548
+    },
+    "Brier": {
+      "Dummy": 0.1723,
+      "Regresión logística": 0.1456,
+      "XGBoost": 0.1356
+    },
+    "F1": {
+      "Dummy": 0.3623,
+      "Regresión logística": 0.4929,
+      "XGBoost": 0.5345
+    },
+    "Precisión": {
+      "Dummy": 0.2213,
+      "Regresión logística": 0.5369,
+      "XGBoost": 0.5128
+    },
+    "Recall": {
+      "Dummy": 1.0,
+      "Regresión logística": 0.4555,
+      "XGBoost": 0.5581
+    },
+    "umbral": {
+      "Dummy": 0.05,
+      "Regresión logística": 0.29,
+      "XGBoost": 0.27
+    }
+  },
+  "auc_train": 0.8163847037572444,
+  "auc_val": 0.7866494507018084,
+  "auc_test": 0.7731205204799528,
+  "cv_auc": [
+    0.7845936171197205,
+    0.004906134481086396
+  ],
+  "ic_auc_test": [
+    0.7580679251905679,
+    0.7874063154487294
+  ],
+  "top10_shap": {
+    "PAY_0": 0.47870001196861267,
+    "LIMIT_BAL": 0.163100004196167,
+    "BILL_AMT1": 0.12680000066757202,
+    "PAY_2": 0.11469999700784683,
+    "PAY_AMT3": 0.0997999981045723,
+    "PAY_AMT1": 0.09700000286102295,
+    "PAY_AMT2": 0.09200000017881393,
+    "PAY_AMT4": 0.07209999859333038,
+    "PAY_3": 0.07129999995231628,
+    "PAY_5": 0.05620000138878822
+  },
+  "what_if": {
+    "tal cual": 0.27092576026916504,
+    "paga el doble cada mes (PAY_AMT x2)": 0.2501271069049835,
+    "paga 5 veces más (PAY_AMT x5)": 0.1544160097837448,
+    "debe la mitad (BILL_AMT x0.5)": 0.25660860538482666,
+    "hubiera pagado a tiempo el último mes (PAY_0 = 0)": 0.16387337446212769
+  },
+  "sanity_checks": {
+    "aditividad (error máx.)": 2.6226043701171875e-06,
+    "etiquetas barajadas: AUC / Spearman": [
+      0.461,
+      0.05
+    ],
+    "barajar top-5: caída AUC (SHAP vs azar)": [
+      0.1312,
+      0.0285
+    ],
+    "acuerdo SHAP-LIME (top-3)": 0.64,
+    "estabilidad bootstrap (Spearman / top-5)": [
+      0.82,
+      0.9
+    ]
+  },
+  "mejora_modelo": {
+    "nº features": {
+      "Base": "22",
+      "A: sin BILL_AMT2..6": "17",
+      "B: A + features nuevas": "21"
+    },
+    "AUC val": {
+      "Base": "0.7866",
+      "A: sin BILL_AMT2..6": "0.7867",
+      "B: A + features nuevas": "0.7902"
+    },
+    "AUC test": {
+      "Base": "0.7731",
+      "A: sin BILL_AMT2..6": "0.7735",
+      "B: A + features nuevas": "0.777"
+    },
+    "PR-AUC test": {
+      "Base": "0.5548",
+      "A: sin BILL_AMT2..6": "0.5553",
+      "B: A + features nuevas": "0.5565"
+    },
+    "Brier test": {
+      "Base": "0.1356",
+      "A: sin BILL_AMT2..6": "0.1357",
+      "B: A + features nuevas": "0.1354"
+    },
+    "Δ AUC test vs base": {
+      "Base": "0.0",
+      "A: sin BILL_AMT2..6": "0.0004",
+      "B: A + features nuevas": "0.0039"
+    },
+    "IC95% Δ": {
+      "Base": "[+0.0000, +0.0000]",
+      "A: sin BILL_AMT2..6": "[-0.0016, +0.0024]",
+      "B: A + features nuevas": "[+0.0006, +0.0072]"
+    }
+  },
+  "decil_top_lift": 3.156192810457516,
+  "politica_coste": {
+    "umbral óptimo (val)": {
+      "2:1": "0.27",
+      "5:1": "0.18",
+      "10:1": "0.09"
+    },
+    "coste/cliente con modelo": {
+      "2:1": "0.3129",
+      "5:1": "0.555",
+      "10:1": "0.7177"
+    },
+    "aprobar a todos": {
+      "2:1": "0.4425",
+      "5:1": "1.1063",
+      "10:1": "2.2126"
+    },
+    "rechazar a todos": {
+      "2:1": "0.7787",
+      "5:1": "0.7787",
+      "10:1": "0.7787"
+    },
+    "% marcado como riesgo": {
+      "2:1": "0.2408",
+      "5:1": "0.3788",
+      "10:1": "0.7609"
+    }
+  },
+  "auditoria_sexo": {
+    "n": {
+      "hombre": "2332",
+      "mujer": "3661"
+    },
+    "impago real": {
+      "hombre": "0.244",
+      "mujer": "0.2068"
+    },
+    "% marcados": {
+      "hombre": "0.2642",
+      "mujer": "0.2259"
+    },
+    "TPR (recall)": {
+      "hombre": "0.5448",
+      "mujer": "0.568"
+    },
+    "FPR": {
+      "hombre": "0.1736",
+      "mujer": "0.1367"
+    },
+    "AUC": {
+      "hombre": "0.7539",
+      "mujer": "0.7858"
+    }
+  },
+  "proxy_auc_sex": 0.6422522205038077
+}
